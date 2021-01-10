@@ -390,6 +390,7 @@ function putUpPosters() {
           let poster = details.poster_path;
           let id = details.id;
           let title = details.original_title;
+
           //   console.log(poster);
           //   console.log(id);
           var h = document.getElementById("movies");
@@ -412,17 +413,17 @@ function putUpPosters() {
               `<div class="movie seen"  id="${id}">
                     <img src="https://image.tmdb.org/t/p/w500${poster}" alt="${title}" id="poster" class="image"/> <span class="material-icons circlecheck">
                     check_circle_outline
-                    </span><div class="movieTitle">${title}</div>
+                    </span><div class="movieTitle"><a href="https://www.themoviedb.org/movie/${id}">${title}</a></div>
                     </div>`
             );
           } else {
             h.insertAdjacentHTML(
               "beforeend",
               `<div class="movie unseen"  id="${id}">
-<img src="https://image.tmdb.org/t/p/w500${poster}" alt="${title}" id="poster" class="image"/> <span class="material-icons circlecheck">
-check_circle_outline
-</span><div class="movieTitle">${title}</div>
-</div>`
+                    <img src="https://image.tmdb.org/t/p/w500${poster}" alt="${title}" id="poster" class="image"/> <span class="material-icons circlecheck">
+                    check_circle_outline
+                    </span><div class="movieTitle"><a href="https://www.themoviedb.org/movie/${id}">${title}</a></div>
+                    </div>`
             );
           }
 
@@ -430,90 +431,96 @@ check_circle_outline
 
           var j = h.lastElementChild;
 
-          j.addEventListener("click", function () {
-            if (j.classList.contains("unseen") == true) {
-              j.classList.remove("unseen");
-              j.classList.add("seen");
-              if (loggedIn == 1) {
-                // console.log(parseInt(j.id, 10));
-                // console.log(dbWatched);
-                dbWatched = dbWatched.concat(parseInt(j.id, 10));
-                userDoc.set(
-                  {
-                    watched: dbWatched,
-                  },
-                  { merge: true }
-                );
-              } else {
-                var anoncount = JSON.parse(localStorage.getItem("anoncount"));
-                anoncount++;
-                if (anoncount == 2) {
-                  document.getElementById("loginWarning").style.display =
-                    "block";
-                  localStorage.setItem("anoncount", JSON.stringify(3));
+          j.getElementsByClassName("image")[0].addEventListener(
+            "click",
+            function () {
+              if (j.classList.contains("unseen") == true) {
+                j.classList.remove("unseen");
+                j.classList.add("seen");
+                if (loggedIn == 1) {
+                  // console.log(parseInt(j.id, 10));
+                  // console.log(dbWatched);
+                  dbWatched = dbWatched.concat(parseInt(j.id, 10));
+                  userDoc.set(
+                    {
+                      watched: dbWatched,
+                    },
+                    { merge: true }
+                  );
                 } else {
-                  localStorage.setItem("anoncount", JSON.stringify(anoncount));
+                  var anoncount = JSON.parse(localStorage.getItem("anoncount"));
+                  anoncount++;
+                  if (anoncount == 2) {
+                    document.getElementById("loginWarning").style.display =
+                      "block";
+                    localStorage.setItem("anoncount", JSON.stringify(3));
+                  } else {
+                    localStorage.setItem(
+                      "anoncount",
+                      JSON.stringify(anoncount)
+                    );
+                  }
+                }
+                local.push(parseInt(j.id, 10));
+                localStorage.setItem("watched", JSON.stringify(local));
+              } else {
+                j.classList.remove("seen");
+                j.classList.add("unseen");
+
+                if (loggedIn == 1) {
+                  var index = dbWatched.indexOf(parseInt(j.id, 10));
+                  dbWatched.splice(index, 1);
+                  userDoc.set(
+                    {
+                      watched: dbWatched,
+                    },
+                    { merge: true }
+                  );
+                } else {
+                  var index = local.indexOf(parseInt(j.id, 10));
+                  if (index > -1) {
+                    local.splice(index, 1);
+                    localStorage.setItem("watched", JSON.stringify(local));
+                  }
                 }
               }
-              local.push(parseInt(j.id, 10));
-              localStorage.setItem("watched", JSON.stringify(local));
-            } else {
-              j.classList.remove("seen");
-              j.classList.add("unseen");
+              updateBar();
 
+              //leaders bars
+              //create ratios and store
               if (loggedIn == 1) {
-                var index = dbWatched.indexOf(parseInt(j.id, 10));
-                dbWatched.splice(index, 1);
+                var oscarsMatch = dbWatched.filter((element) =>
+                  oscarsList.includes(element)
+                );
+                var oscarsRatio = Math.round(
+                  (100 * oscarsMatch.length) / oscarsList.length
+                );
+
+                var globesMatch = dbWatched.filter((element) =>
+                  globesList.includes(element)
+                );
+                var globesRatio = Math.round(
+                  (100 * globesMatch.length) / globesList.length
+                );
+
+                var spiritMatch = dbWatched.filter((element) =>
+                  spiritList.includes(element)
+                );
+                var spiritRatio = Math.round(
+                  (100 * spiritMatch.length) / spiritList.length
+                );
+
                 userDoc.set(
                   {
-                    watched: dbWatched,
+                    oscars: oscarsRatio,
+                    globes: globesRatio,
+                    spirits: spiritRatio,
                   },
                   { merge: true }
                 );
-              } else {
-                var index = local.indexOf(parseInt(j.id, 10));
-                if (index > -1) {
-                  local.splice(index, 1);
-                  localStorage.setItem("watched", JSON.stringify(local));
-                }
               }
             }
-            updateBar();
-
-            //leaders bars
-            //create ratios and store
-            if (loggedIn == 1) {
-              var oscarsMatch = dbWatched.filter((element) =>
-                oscarsList.includes(element)
-              );
-              var oscarsRatio = Math.round(
-                (100 * oscarsMatch.length) / oscarsList.length
-              );
-
-              var globesMatch = dbWatched.filter((element) =>
-                globesList.includes(element)
-              );
-              var globesRatio = Math.round(
-                (100 * globesMatch.length) / globesList.length
-              );
-
-              var spiritMatch = dbWatched.filter((element) =>
-                spiritList.includes(element)
-              );
-              var spiritRatio = Math.round(
-                (100 * spiritMatch.length) / spiritList.length
-              );
-
-              userDoc.set(
-                {
-                  oscars: oscarsRatio,
-                  globes: globesRatio,
-                  spirits: spiritRatio,
-                },
-                { merge: true }
-              );
-            }
-          });
+          );
         });
     }
   }

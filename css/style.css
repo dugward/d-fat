@@ -3,7 +3,9 @@
 .predictions a,
 .predicitons a:visited,
 .leaderlink a,
-.leaderlink a:visited {
+.leaderlink a:visited,
+.movie a,
+.movie a:visited {
   text-decoration: none;
   color: inherit;
   border-bottom: 1px dashed grey;
@@ -11,7 +13,8 @@
 
 #dugward a:active,
 .predictions a:active,
-.leaderlink a:active {
+.leaderlink a:active,
+.movie a:active {
   border-bottom: 1px solid black;
 }
 
@@ -220,6 +223,8 @@
   margin-left: 10%;
   width: 40%;
   font-size: 0.9em;
+}
+.leadername a {
   border-bottom: 1px dotted lightgrey;
 }
 
@@ -321,7 +326,8 @@
 
   #dugward a:hover,
   .predictions a:hover,
-  .leaderlink a:hover {
+  .leaderlink a:hover,
+  .movie a:hover {
     border-bottom: 1px solid black;
   }
 
