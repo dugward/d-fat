@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Metastuff
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta
+      name="description"
+      content="A site to track which award-nominated films you have watched"
+    />
+    <meta
+      property="og:description"
+      content="A site to track which award-nominated films you have watched"
+    />
+    <meta property="og:image" content="tm2.jpg" />
+    <title>D-FAT (dugward's film awards tracker)</title>
+
+    <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link
+      href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/skeleton.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+  </head>
+  <body class="site">
+    <div class="container">
+      <!-- Warning page
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <div id="loginWarning">
+        <p>
+          You should log in up above! Then your progress will save across
+          devices. -Dugward<br /><span class="material-icons close">
+            close
+          </span>
+        </p>
+      </div>
+      <!-- Header
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <div class="row first">
+        <div class="title">
+          <span class="long">Dugward's Film Awards Tracker</span>
+          <span class="short">D-FAT</span>
+        </div>
+        <div>
+          <div id="help">
+            <div class="profilePic"></div>
+            <div class="button login unclicked" id="loginButton">Login</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Check Buttons
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+      <div class="row listButtons sweep">
+        <div class="twelve columns">
+          <a href="#" id="oscars" class="button list checked"
+            ><span class="material-icons"> done </span> Indiewire</a
+          >
+          <a href="#" id="globes" class="button list">Variety</a>
+          <a href="#" id="spirits" class="button list">50 Best</a>
+        </div>
+      </div>
+      <!-- Predictions Warning 
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+      <div class="row predictions">
+        <div class="warning sweep">
+          <span class="red">
+            (Prediction lists only atm.
+            <a
+              href="https:/www.indiewire.com/gallery/50-best-movies-2020-critics-poll/"
+              >50 Best link</a
+            >.)</span
+          >
+        </div>
+      </div>
+
+      <div class="row warning leaderlink">
+        <a id="leaderlink" class="closed">The Leader Board</a>
+      </div>
+      <!-- Progress Bar
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+      <div class="row progress sweep">
+        <div class="myProgress">
+          <div class="myBar">0%</div>
+        </div>
+      </div>
+
+      <!-- spinner
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <div class="row" id="spinner">
+        <div class="loader"></div>
+        <p class="loading">Loading . . .</p>
+      </div>
+      <!-- Movies div
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+      <div id="movies" class="row movies sweep"></div>
+
+      <!-- Leaderboard div
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+      <div id="leaders" class="row">
+        <div class="row" id="oscarsList">
+          <div class="row leadersTitle"><h4>IndieWire</h4></div>
+          <div class="row leaderrow sortitem" sortweight="10">
+            <div class="leadername">Doug Ricearonistein</div>
+            <div class="myProgress leaderbar">
+              <div class="myBar">10%</div>
+            </div>
+          </div>
+            <div class="row leaderrow sortitem" sortweight=20>
+              <div class="leadername">Doug Ricearonistein</div>
+              <div class="myProgress leaderbar">
+                <div class="myBar">20%</div>
+              </div>
+            </div>
+            <!--  -->
+            <div class="row leaderrow">
+              <div class="leadername">Doug Ricearonistein</div>
+              <div class="myProgress leaderbar">
+                <div class="myBar">15%</div>
+              </div>
+            </div>
+            <!--  -->
+          </div>
+        </div>
+        <div class="row" id="globesList">
+          <div class="leadersTitle"><h4>Variety</h4></div>
+        </div>
+        <div class="row" id="spiritList">
+          <div class="leadersTitle"><h4>50 Best</h4></div>
+        </div>
+      </div>
+
+      <!-- dugward link
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+      <div class="row">
+        <div id="dugward">
+          <a href="http://www.dugward.com"> Other little dugward creations</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,358 @@
+#dugward a,
+#dugward a:visited,
+.predictions a,
+.predicitons a:visited,
+.leaderlink a,
+.leaderlink a:visited {
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px dashed grey;
+}
+
+#dugward a:active,
+.predictions a:active,
+.leaderlink a:active {
+  border-bottom: 1px solid black;
+}
+
+#spinner {
+  text-align: center;
+  display: none;
+}
+
+#leaders {
+  display: block;
+}
+
+#leaderlink {
+  cursor: pointer;
+}
+
+.loader {
+  border: 5px solid white;
+  border-radius: 50%;
+  border-top: 5px solid grey;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  margin: 100px auto 0 auto;
+}
+
+.loading {
+  margin-top: 20px;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#loginWarning {
+  position: fixed;
+  display: none;
+  width: 60%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  background-color: white;
+  border-radius: 4px;
+  padding-top: 2em;
+  padding-left: 1em;
+  padding-right: 1em;
+  z-index: 100;
+  border: 1px solid grey;
+  text-align: center;
+}
+
+.close {
+  text-align: center;
+  padding: 1em;
+  padding-bottom: 0;
+  cursor: pointer;
+}
+.profilePic {
+  display: inline;
+}
+.profilePicture {
+  height: 38px;
+  border-radius: 30px;
+  margin-top: 8px;
+}
+
+.container {
+  max-width: 800px;
+  opacity: 1;
+}
+
+.material-icons {
+  text-align: inherit;
+  vertical-align: middle;
+  margin-top: -4px;
+  font-size: 1.3em;
+  z-index: 50;
+  color: black;
+}
+.first {
+  margin-top: 1em;
+  text-align: left;
+}
+
+.title {
+  float: left;
+  font-size: 2em;
+}
+
+#loginButton {
+  vertical-align: top;
+  margin-top: 12px;
+}
+
+#help {
+  float: right;
+  position: relative;
+}
+
+.long {
+  display: none;
+}
+
+.predictions {
+  text-align: center;
+  font-size: 1em;
+}
+
+.listButtons {
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+}
+
+.checked {
+  background-color: rgb(175, 211, 175);
+}
+
+.clicked {
+  background-color: rgb(175, 211, 175);
+}
+
+.button {
+  margin-right: 1em;
+  text-align: center;
+}
+
+.button:active {
+  background-color: rgb(175, 211, 175);
+}
+
+.warning {
+  font-size: 0.9em;
+}
+
+.red {
+  background-color: rgba(255, 0, 0, 0.089);
+  padding: 0 0.5em;
+}
+
+.progress {
+  margin-top: 1em;
+  text-align: center;
+}
+
+.myProgress {
+  width: 95%;
+  margin-left: 2.5%;
+  outline: dotted lightgrey 1px;
+}
+
+.myBar,
+#myBar {
+  width: 0%;
+  height: 20px;
+  background-color: rgb(175, 211, 175);
+  font-weight: bold;
+  text-align: center;
+  line-height: 20px;
+  color: rgb(85, 85, 85);
+}
+
+.leaderlink {
+  text-align: center;
+}
+
+.leadersTitle {
+  padding: 2em 0 0 2.5em;
+}
+
+.leadername {
+  float: left;
+  margin-left: 10%;
+  width: 40%;
+  font-size: 0.9em;
+  border-bottom: 1px dotted lightgrey;
+}
+
+.leaderbar {
+  float: right;
+  width: 40%;
+}
+
+.leaderrow {
+  display: block;
+  clear: both;
+  padding-top: 1.5em;
+}
+
+.movies {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.movie {
+  width: 140px;
+  height: 212px;
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  margin-top: 1em;
+}
+
+.image {
+  width: 110px;
+}
+
+.circlecheck {
+  margin-top: -200px;
+  font-size: 4em;
+}
+
+.movieTitle {
+  display: block;
+  width: 105px;
+  font-size: 0.9em;
+  font-weight: 600;
+  margin-top: -30px;
+  margin-left: 17px;
+  text-align: left;
+}
+
+.unseen .image,
+.unseen .image:visited {
+  opacity: 0.9;
+}
+
+.seen .image,
+.unseen .image:active {
+  opacity: 0.4;
+  z-index: 1;
+}
+
+.seen .movieTitle,
+.unseen .image:active {
+  opacity: 0.4;
+  z-index: 1;
+}
+
+.unseen .circlecheck {
+  visibility: hidden;
+}
+
+.seen .circlecheck {
+  color: rgb(39, 141, 36);
+  z-index: 80;
+}
+
+#dugward {
+  margin-top: 2em;
+  margin-bottom: 10em;
+  font-size: 1em;
+  text-align: center;
+}
+
+@media (hover: hover) {
+  .list:hover {
+    background-color: rgb(175, 211, 175);
+  }
+
+  .login:hover {
+    background-color: rgb(175, 211, 175);
+  }
+  .unseen .image:hover {
+    opacity: 0.4;
+    z-index: 1;
+  }
+  .unseen .image:hover ~ .circlecheck {
+    visibility: visible;
+    color: black;
+    z-index: 80;
+  }
+
+  #dugward a:hover,
+  .predictions a:hover,
+  .leaderlink a:hover {
+    border-bottom: 1px solid black;
+  }
+
+  #googleButton span:hover {
+    cursor: pointer;
+  }
+}
+
+/* Larger than mobile */
+@media (min-width: 400px) {
+}
+
+/* Larger than phablet (also point when grid becomes active) */
+@media (min-width: 550px) {
+  .button,
+  button,
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"] {
+    height: 38px;
+    padding: 0 30px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: 0.1rem;
+  }
+
+  .warning {
+    font-size: 1.1em;
+  }
+}
+
+/* Larger than tablet */
+@media (min-width: 750px) {
+  .long {
+    display: block;
+  }
+  .short {
+    display: none;
+  }
+}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {
+}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {
+}
