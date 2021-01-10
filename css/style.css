@@ -234,6 +234,8 @@ a.button:active {
 
 #userList {
   display: none;
+  margin-top: 1em;
+  text-align: center;
 }
 
 .movies {
