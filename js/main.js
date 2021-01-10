@@ -109,13 +109,14 @@ firebase.auth().onAuthStateChanged(function (user) {
         } else {
         }
       } else {
-        db.collection("users").doc(userID).set({
-          watched: [],
-          name: userName,
-        });
         if (local.length >= 1) {
           userDoc.set({
             watched: local,
+            name: userName,
+          });
+        } else {
+          db.collection("users").doc(userID).set({
+            watched: [],
             name: userName,
           });
         }
