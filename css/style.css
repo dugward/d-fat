@@ -143,7 +143,6 @@
   vertical-align: middle;
   text-align: center;
   width: 100%;
-  padding-bottom: 1em;
 }
 
 .checked {
@@ -165,6 +164,7 @@
 
 .warning {
   font-size: 0.9em;
+  padding-bottom: 1em;
 }
 
 .red {
