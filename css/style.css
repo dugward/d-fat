@@ -1,21 +1,18 @@
-#dugward a,
-#dugward a:visited,
-.predictions a,
-.predicitons a:visited,
-.leaderlink a,
-.leaderlink a:visited,
-.movie a,
-.movie a:visited {
+a,
+a:visited {
   text-decoration: none;
   color: inherit;
   border-bottom: 1px dashed grey;
 }
-
-#dugward a:active,
-.predictions a:active,
-.leaderlink a:active,
-.movie a:active {
+a.button {
+  border-bottom: 1px solid #bbb;
+}
+a:active {
   border-bottom: 1px solid black;
+}
+
+a.button:active {
+  border-bottom: 1px solid #bbb;
 }
 
 #spinner {
@@ -149,7 +146,6 @@
   vertical-align: middle;
   text-align: center;
   width: 100%;
-
   padding-bottom: 1em;
   padding-top: 1em;
   background-color: white;
@@ -224,9 +220,6 @@
   width: 40%;
   font-size: 0.9em;
 }
-.leadername a {
-  border-bottom: 1px dotted lightgrey;
-}
 
 .leaderbar {
   float: right;
@@ -237,6 +230,10 @@
   display: block;
   clear: both;
   padding-top: 1.5em;
+}
+
+#userList {
+  display: none;
 }
 
 .movies {
@@ -261,6 +258,14 @@
 .circlecheck {
   margin-top: -200px;
   font-size: 4em;
+}
+
+#userList .circlecheck {
+  visibility: hidden;
+}
+
+.userlistname {
+  font-size: 1.5em;
 }
 
 .movieTitle {
@@ -318,17 +323,19 @@
     opacity: 0.4;
     z-index: 1;
   }
+
   .unseen .image:hover ~ .circlecheck {
     visibility: visible;
     color: black;
     z-index: 80;
   }
 
-  #dugward a:hover,
-  .predictions a:hover,
-  .leaderlink a:hover,
-  .movie a:hover {
+  a:hover {
     border-bottom: 1px solid black;
+  }
+
+  a.button:hover {
+    border-bottom: 1px solid #bbb;
   }
 
   #googleButton span:hover {

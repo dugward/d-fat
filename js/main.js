@@ -163,6 +163,7 @@ function backToMovies() {
   leaders.style.display = "none";
   leaderslink.classList.remove("open");
   leaderslink.classList.add("closed");
+  document.getElementById("userList").innerHTML = "";
   leaderslink.innerText = "The Leader Board";
   for (let i = 0; i < sweep.length; i++) {
     sweep[i].style.display = "block";
@@ -194,14 +195,15 @@ leaderslink.addEventListener("click", function () {
       .then(function (x) {
         x.forEach(function (doc) {
           var userData = doc.data();
+
           document.getElementById("oscarsList").insertAdjacentHTML(
             "beforeend",
             `            <div class="row leaderrow">
-                          <div class="leadername">${userData.name}</div>
-                          <div class="myProgress leaderbar">
-                            <div class="myBar" style="width:${userData.oscars}%;">${userData.oscars}%</div>
-                          </div>
-                        </div>`
+                        <div class="leadername ${userData.name}"  id="${doc.id}"><a  >${userData.name}</a></div>
+                        <div class="myProgress leaderbar">
+                          <div class="myBar" style="width:${userData.oscars}%;">${userData.oscars}%</div>
+                        </div>
+                      </div>`
           );
         });
       });
@@ -219,11 +221,11 @@ leaderslink.addEventListener("click", function () {
           document.getElementById("globesList").insertAdjacentHTML(
             "beforeend",
             `            <div class="row leaderrow">
-                      <div class="leadername">${userData.name}</div>
-                      <div class="myProgress leaderbar">
-                        <div class="myBar" style="width:${userData.globes}%;">${userData.globes}%</div>
-                      </div>
-                    </div>`
+                        <div class="leadername ${userData.name}"  id="${doc.id}"><a  >${userData.name}</a></div>
+                        <div class="myProgress leaderbar">
+                          <div class="myBar" style="width:${userData.globes}%;">${userData.globes}%</div>
+                        </div>
+                      </div>`
           );
         });
       });
@@ -241,7 +243,7 @@ leaderslink.addEventListener("click", function () {
           document.getElementById("spiritList").insertAdjacentHTML(
             "beforeend",
             `            <div class="row leaderrow">
-                        <div class="leadername">${userData.name}</div>
+                        <div class="leadername ${userData.name}"  id="${doc.id}" ><a>${userData.name}</a></div>
                         <div class="myProgress leaderbar">
                           <div class="myBar" style="width:${userData.spirits}%;">${userData.spirits}%</div>
                         </div>
@@ -249,6 +251,65 @@ leaderslink.addEventListener("click", function () {
           );
         });
       });
+
+    db.collection("users")
+      .orderBy("spirits", "desc")
+      .get()
+      .then(function (x) {
+        nameLinks();
+      });
+
+    function nameLinks() {
+      var leadernames = document.querySelectorAll(".leadername");
+      for (let i = 0; i < leadernames.length; i++) {
+        leadernames[i].addEventListener("click", function () {
+          //
+          //
+          console.log(leadernames[i].id);
+          document.getElementById("leaders").style.display = "none";
+          var userlist = document.getElementById("userList");
+          userlist.style.display = "block";
+          userlist.innerHTML = `<div class="userlistname">${leadernames[i].classList[1]} has watched:</div>`;
+          db.collection("users")
+            .doc(leadernames[i].id)
+            .get()
+            .then(function (doc) {
+              //
+              var userwatched = doc.data().watched;
+              userwatched.forEach((el) => {
+                const fetchPromise = fetch(
+                  `https://api.themoviedb.org/3/movie/${el}?api_key=b737a09f5864be7f9f38f1d5ad71c151&language=en-US`
+                );
+                fetchPromise
+                  .then((response) => {
+                    return response.json();
+                  })
+                  .then((details) => {
+                    let poster = details.poster_path;
+                    let id = details.id;
+                    let title = details.original_title;
+
+                    var h = document.getElementById("userList");
+                    h.insertAdjacentHTML(
+                      "beforeend",
+                      `<div class="movie"  id="${id}">
+                    <img src="https://image.tmdb.org/t/p/w500${poster}" alt="${title}" id="poster" class="image"/> <span class="material-icons circlecheck">
+                    check_circle_outline
+                    </span><div class="movieTitle"><a href="https://www.themoviedb.org/movie/${id}">${title}</a></div>
+                    </div>`
+                    );
+                  });
+              });
+
+              //
+            });
+        });
+      }
+    }
+
+    // The user's list page
+
+    //
   } else {
     backToMovies();
   }
