@@ -147,11 +147,17 @@ loggo.addEventListener("click", function () {
     firebase.auth().signInWithRedirect(provider);
   }
 });
+let pageState = 0;
+document.getElementById("title").addEventListener("click", function () {
+  if (pageState == 1) {
+    backToMovies();
+  }
+});
 
 var leaders = document.getElementById("leaders");
 var leaderslink = document.getElementById("leaderlink");
 var sweep = document.getElementsByClassName("sweep");
-let pageState = 0;
+
 function backToMovies() {
   leaders.style.display = "none";
   leaderslink.classList.remove("open");
@@ -174,6 +180,7 @@ leaderslink.addEventListener("click", function () {
     }
     pageState = 1;
     history.replaceState(null, null, null);
+    document.getElementById("title").style.cursor = "pointer";
     //update leadcers bars
 
     document.getElementById(
