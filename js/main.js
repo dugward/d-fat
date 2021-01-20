@@ -148,7 +148,11 @@ loggo.addEventListener("click", function () {
     firebase.auth().signInWithRedirect(provider);
   }
 });
-let pageState = 0;
+window.addEventListener("popstate", function () {
+  if (pageState == 1) {
+    backToMovies();
+  }
+});
 document.getElementById("title").addEventListener("click", function () {
   if (pageState == 1) {
     backToMovies();
@@ -450,7 +454,8 @@ function putUpPosters() {
         .then((details) => {
           let poster = details.poster_path;
           let id = details.id;
-          let title = details.original_title;
+          let title = details.title;
+          console.log(details);
 
           //   console.log(poster);
           //   console.log(id);
