@@ -1,6 +1,7 @@
 import { globesList, oscarsList, spiritList, masterList } from "./lists.js";
 
 history.pushState(null, null, null);
+var pageState = 0;
 
 var firebaseConfig = {
   apiKey: "AIzaSyCDObBl4mknVHOzlkaDLAPslVkKNngS8-s",
@@ -455,7 +456,6 @@ function putUpPosters() {
           let poster = details.poster_path;
           let id = details.id;
           let title = details.title;
-          console.log(details);
 
           //   console.log(poster);
           //   console.log(id);
