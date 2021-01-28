@@ -192,7 +192,7 @@ leaderslink.addEventListener("click", function () {
 
     document.getElementById(
       "oscarsList"
-    ).innerHTML = `<div class="row leadersTitle"><h4>IndieWire</h4></div>`;
+    ).innerHTML = `<div class="row leadersTitle"><h4>Spirits</h4></div>`;
     //
     db.collection("users")
       .orderBy("oscars", "desc")
