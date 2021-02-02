@@ -151,6 +151,10 @@ a.button:active {
   position: relative;
 }
 
+#listExplain {
+  display: none;
+}
+
 .listButtons {
   vertical-align: middle;
   text-align: center;

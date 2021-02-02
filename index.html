@@ -78,11 +78,13 @@
 
       <div class="row listButtons sweep">
         <div class="twelve columns">
-          <a href="#" id="oscars" class="button list checked"
-            ><span class="material-icons"> done </span> Spirits</a
+          <a href="#" id="indie" class="button list checked"
+            ><span class="material-icons"> done </span> IndieWire</a
           >
-          <a href="#" id="globes" class="button list">Variety</a>
-          <a href="#" id="spirits" class="button list">50 Best</a>
+          <a href="#" id="variety" class="button list">Variety</a>
+          <a href="#" id="spirits" class="button list">Spirits</a>
+          <a href="#" id="fifty" class="button list">50 Best</a>
+          <a href="#" id="union" class="button list">∩ List</a>
         </div>
       </div>
       <!-- Predictions Warning 
@@ -91,15 +93,37 @@
       <div class="row predictions">
         <div class="warning sweep">
           <span class="red">
-            (Prediction lists only atm.
-            <a
-              href="https://www.indiewire.com/gallery/50-best-movies-2020-critics-poll/"
-            >
-              50 Best link</a
-            >. )
+            (
+            <a id="listexplain"> Explaination of lists</a>)
           </span>
         </div>
       </div>
+
+      <!-- Listexplain div
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+      <div id="listExplain" class="row">
+        <p class="listexplain">
+          <b>IndieWire:</b> The Oscars predictions from the critics at IndieWire
+        </p>
+        <p class="listexplain">
+          <b>Variety:</b> The Oscars predictions from the critics at Variety
+        </p>
+        <p class="listexplain">
+          <b>Sprits:</b> The Independent Spirit Awards nominees
+        </p>
+        <p class="listexplain">
+          <b>50 Best:</b> A list of the year's best according to a survey of 230
+          film critics by IndieWire
+        </p>
+        <p class="listexplain">
+          <b>∩ List:</b> The intersection of all other lists, excluding the
+          Spirit nominees
+        </p>
+      </div>
+
+      <!-- Leaders div
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
       <div class="row warning leaderlink">
         <a id="leaderlink" class="closed">The Leader Board</a>
@@ -128,9 +152,11 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
       <div id="leaders" class="row">
-        <div class="row" id="oscarsList"></div>
-        <div class="row" id="globesList"></div>
-        <div class="row" id="spiritList"></div>
+        <div class="row" id="indieList"></div>
+        <div class="row" id="varietyList"></div>
+        <div class="row" id="spiritsList"></div>
+        <div class="row" id="fiftyList"></div>
+        <div class="row" id="unionList"></div>
       </div>
 
       <!-- userlist div

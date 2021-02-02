@@ -1,43 +1,49 @@
 // Here are the lists
 
-export const oscarsList = [
-  446159,
-  502033,
-  530723,
-  539617,
-  558582,
-  558582,
-  570670,
-  581734,
-  582014,
-  587792,
-  595671,
-  595940,
-  597219,
-  599960,
-  604031,
-  607430,
-  615643,
+export const indieList = [
   615667,
-  620897,
-  627463,
-  628534,
-  653574,
-  653594,
-  653668,
+  556984,
+  653723,
+  575417,
+  464052,
+  654170,
+  653762,
+  675485,
+  739246,
+  441130,
+  667869,
+  653746,
+  659967,
+  653727,
+  600354,
+  502033,
+  582927,
+  653579,
+  728928,
+  508442,
+  581032,
   653725,
-  653756,
-  660958,
-  664297,
-  665888,
-  666271,
+  641662,
+  661914,
+  581032,
+  581734,
+  664601,
+  615643,
+  740985,
+  539529,
+  653574,
+  727705,
+  501738,
+  581859,
+  568467,
+  580175,
+  614560,
+  560050,
   676535,
-  727002,
-  728116,
-  728118,
+  508439,
 ];
 
-export const globesList = [
+export const varietyList = [
   600354,
   500840,
   592984,
@@ -73,7 +79,7 @@ export const globesList = [
   581734,
 ];
 
-export const spiritList = [
+export const fiftyList = [
   582014,
   545237,
   675485,
@@ -123,14 +129,45 @@ export const spiritList = [
   614560,
 ];
 
-// Making the master list
-
-var concatList = oscarsList.concat(globesList, spiritList);
+export const spiritsList = [
+  446159,
+  502033,
+  530723,
+  539617,
+  558582,
+  558582,
+  570670,
+  581734,
+  582014,
+  587792,
+  595671,
+  595940,
+  597219,
+  599960,
+  604031,
+  607430,
+  615643,
+  615667,
+  620897,
+  627463,
+  628534,
+  653574,
+  653594,
+  653668,
+  653725,
+  653756,
+  660958,
+  664297,
+  665888,
+  666271,
+  676535,
+  727002,
+  728116,
+  728118,
+];
 
 // console.log(concatList);
 
-export var masterList = concatList.filter(
-  (value, index) => concatList.indexOf(value) === index
-);
+const unionLista = fiftyList.filter((x) => varietyList.includes(x));
 
-// console.log(masterList);
+export const unionList = unionLista.filter((x) => indieList.includes(x));

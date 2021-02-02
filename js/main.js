@@ -1,4 +1,12 @@
-import { globesList, oscarsList, spiritList, masterList } from "./lists.js";
+import {
+  varietyList,
+  indieList,
+  fiftyList,
+  spiritsList,
+  unionList,
+} from "./lists.js";
+
+console.log(unionList);
 
 history.pushState(null, null, null);
 var pageState = 0;
@@ -139,6 +147,17 @@ firebase.auth().onAuthStateChanged(function (user) {
     document.getElementsByClassName("profilePic")[0].innerHTML = "";
   }
 });
+var explain = 0;
+
+document.getElementById("listexplain").addEventListener("click", function () {
+  if (explain == 0) {
+    document.getElementById("listExplain").style.display = "block";
+    explain = 1;
+  } else {
+    document.getElementById("listExplain").style.display = "none";
+    explain = 0;
+  }
+});
 
 loggo.addEventListener("click", function () {
   if (loggedIn == 1) {
@@ -191,22 +210,22 @@ leaderslink.addEventListener("click", function () {
     //update leadcers bars
 
     document.getElementById(
-      "oscarsList"
-    ).innerHTML = `<div class="row leadersTitle"><h4>Spirits</h4></div>`;
+      "indieList"
+    ).innerHTML = `<div class="row leadersTitle"><h4>IndieWire</h4></div>`;
     //
     db.collection("users")
-      .orderBy("oscars", "desc")
+      .orderBy("indie", "desc")
       .get()
       .then(function (x) {
         x.forEach(function (doc) {
           var userData = doc.data();
 
-          document.getElementById("oscarsList").insertAdjacentHTML(
+          document.getElementById("indieList").insertAdjacentHTML(
             "beforeend",
             `            <div class="row leaderrow">
                         <div class="leadername ${userData.name}"  id="${doc.id}"><a  >${userData.name}</a></div>
                         <div class="myProgress leaderbar">
-                          <div class="myBar" style="width:${userData.oscars}%;">${userData.oscars}%</div>
+                          <div class="myBar" style="width:${userData.indie}%;">${userData.indie}%</div>
                         </div>
                       </div>`
           );
@@ -214,30 +233,31 @@ leaderslink.addEventListener("click", function () {
       });
     //
     document.getElementById(
-      "globesList"
+      "varietyList"
     ).innerHTML = `<div class="row leadersTitle"><h4>Variety</h4></div>`;
     //
     db.collection("users")
-      .orderBy("globes", "desc")
+      .orderBy("variety", "desc")
       .get()
       .then(function (x) {
         x.forEach(function (doc) {
           var userData = doc.data();
-          document.getElementById("globesList").insertAdjacentHTML(
+          document.getElementById("varietyList").insertAdjacentHTML(
             "beforeend",
             `            <div class="row leaderrow">
                         <div class="leadername ${userData.name}"  id="${doc.id}"><a  >${userData.name}</a></div>
                         <div class="myProgress leaderbar">
-                          <div class="myBar" style="width:${userData.globes}%;">${userData.globes}%</div>
+                          <div class="myBar" style="width:${userData.variety}%;">${userData.variety}%</div>
                         </div>
                       </div>`
           );
         });
       });
+
     //
     document.getElementById(
-      "spiritList"
-    ).innerHTML = `<div class="row leadersTitle"><h4>Best 50</h4></div>`;
+      "spiritsList"
+    ).innerHTML = `<div class="row leadersTitle"><h4>Spirits</h4></div>`;
     //
     db.collection("users")
       .orderBy("spirits", "desc")
@@ -245,12 +265,55 @@ leaderslink.addEventListener("click", function () {
       .then(function (x) {
         x.forEach(function (doc) {
           var userData = doc.data();
-          document.getElementById("spiritList").insertAdjacentHTML(
+          document.getElementById("spiritsList").insertAdjacentHTML(
+            "beforeend",
+            `            <div class="row leaderrow">
+                          <div class="leadername ${userData.name}"  id="${doc.id}" ><a>${userData.name}</a></div>
+                          <div class="myProgress leaderbar">
+                            <div class="myBar" style="width:${userData.spirits}%;">${userData.spirits}%</div>
+                          </div>
+                        </div>`
+          );
+        });
+      });
+    //
+    document.getElementById(
+      "fiftyList"
+    ).innerHTML = `<div class="row leadersTitle"><h4>Best 50</h4></div>`;
+    //
+    db.collection("users")
+      .orderBy("fifty", "desc")
+      .get()
+      .then(function (x) {
+        x.forEach(function (doc) {
+          var userData = doc.data();
+          document.getElementById("fiftyList").insertAdjacentHTML(
             "beforeend",
             `            <div class="row leaderrow">
                         <div class="leadername ${userData.name}"  id="${doc.id}" ><a>${userData.name}</a></div>
                         <div class="myProgress leaderbar">
-                          <div class="myBar" style="width:${userData.spirits}%;">${userData.spirits}%</div>
+                          <div class="myBar" style="width:${userData.fifty}%;">${userData.fifty}%</div>
+                        </div>
+                      </div>`
+          );
+        });
+      });
+    document.getElementById(
+      "unionList"
+    ).innerHTML = `<div class="row leadersTitle"><h4>∩ List</h4></div>`;
+    db.collection("users")
+      .orderBy("union", "desc")
+      .get()
+      .then(function (x) {
+        x.forEach(function (doc) {
+          var userData = doc.data();
+
+          document.getElementById("unionList").insertAdjacentHTML(
+            "beforeend",
+            `            <div class="row leaderrow">
+                        <div class="leadername ${userData.name}"  id="${doc.id}"><a  >${userData.name}</a></div>
+                        <div class="myProgress leaderbar">
+                          <div class="myBar" style="width:${userData.union}%;">${userData.union}%</div>
                         </div>
                       </div>`
           );
@@ -258,7 +321,7 @@ leaderslink.addEventListener("click", function () {
       });
 
     db.collection("users")
-      .orderBy("spirits", "desc")
+      .orderBy("fifty", "desc")
       .get()
       .then(function (x) {
         nameLinks();
@@ -403,14 +466,21 @@ function putUpPosters() {
   //console.log(checked.length);
 
   for (let i = 0; i < checked.length; i++) {
-    if (checked[i].id == "oscars") {
-      toggleList = toggleList.concat(oscarsList);
+    if (checked[i].id == "indie") {
+      toggleList = toggleList.concat(indieList);
     }
-    if (checked[i].id == "globes") {
-      toggleList = toggleList.concat(globesList);
+    if (checked[i].id == "variety") {
+      toggleList = toggleList.concat(varietyList);
     }
+
     if (checked[i].id == "spirits") {
-      toggleList = toggleList.concat(spiritList);
+      toggleList = toggleList.concat(spiritsList);
+    }
+    if (checked[i].id == "fifty") {
+      toggleList = toggleList.concat(fiftyList);
+    }
+    if (checked[i].id == "union") {
+      toggleList = toggleList.concat(unionList);
     }
 
     //Cut out the dupes
@@ -555,32 +625,46 @@ function putUpPosters() {
               //leaders bars
               //create ratios and store
               if (loggedIn == 1) {
-                var oscarsMatch = dbWatched.filter((element) =>
-                  oscarsList.includes(element)
+                var indieMatch = dbWatched.filter((element) =>
+                  indieList.includes(element)
                 );
-                var oscarsRatio = Math.round(
-                  (100 * oscarsMatch.length) / oscarsList.length
-                );
-
-                var globesMatch = dbWatched.filter((element) =>
-                  globesList.includes(element)
-                );
-                var globesRatio = Math.round(
-                  (100 * globesMatch.length) / globesList.length
+                var indieRatio = Math.round(
+                  (100 * indieMatch.length) / indieList.length
                 );
 
-                var spiritMatch = dbWatched.filter((element) =>
-                  spiritList.includes(element)
+                var varietyMatch = dbWatched.filter((element) =>
+                  varietyList.includes(element)
                 );
-                var spiritRatio = Math.round(
-                  (100 * spiritMatch.length) / spiritList.length
+                var varietyRatio = Math.round(
+                  (100 * varietyMatch.length) / varietyList.length
+                );
+                var spiritsMatch = dbWatched.filter((element) =>
+                  spiritsList.includes(element)
+                );
+                var spiritsRatio = Math.round(
+                  (100 * spiritsMatch.length) / spiritsList.length
+                );
+                var fiftyMatch = dbWatched.filter((element) =>
+                  fiftyList.includes(element)
+                );
+                var fiftyRatio = Math.round(
+                  (100 * fiftyMatch.length) / fiftyList.length
+                );
+
+                var unionMatch = dbWatched.filter((element) =>
+                  unionList.includes(element)
+                );
+                var unionRatio = Math.round(
+                  (100 * unionMatch.length) / unionList.length
                 );
 
                 userDoc.set(
                   {
-                    oscars: oscarsRatio,
-                    globes: globesRatio,
-                    spirits: spiritRatio,
+                    indie: indieRatio,
+                    variety: varietyRatio,
+                    spirits: spiritsRatio,
+                    fifty: fiftyRatio,
+                    union: unionRatio,
                   },
                   { merge: true }
                 );
