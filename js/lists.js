@@ -58,6 +58,7 @@ export const predictList = [
 ];
 
 export const globesList = [
+  586101,
   502033,
   582014,
   508442,
