@@ -1,6 +1,6 @@
 import {
-  varietyList,
-  indieList,
+  globesList,
+  predictList,
   fiftyList,
   spiritsList,
   unionList,
@@ -210,22 +210,22 @@ leaderslink.addEventListener("click", function () {
     //update leadcers bars
 
     document.getElementById(
-      "indieList"
-    ).innerHTML = `<div class="row leadersTitle"><h4>IndieWire</h4></div>`;
+      "predictList"
+    ).innerHTML = `<div class="row leadersTitle"><h4>Predicts</h4></div>`;
     //
     db.collection("users")
-      .orderBy("indie", "desc")
+      .orderBy("predict", "desc")
       .get()
       .then(function (x) {
         x.forEach(function (doc) {
           var userData = doc.data();
 
-          document.getElementById("indieList").insertAdjacentHTML(
+          document.getElementById("predictList").insertAdjacentHTML(
             "beforeend",
             `            <div class="row leaderrow">
                         <div class="leadername ${userData.name}"  id="${doc.id}"><a  >${userData.name}</a></div>
                         <div class="myProgress leaderbar">
-                          <div class="myBar" style="width:${userData.indie}%;">${userData.indie}%</div>
+                          <div class="myBar" style="width:${userData.predict}%;">${userData.predict}%</div>
                         </div>
                       </div>`
           );
@@ -233,21 +233,21 @@ leaderslink.addEventListener("click", function () {
       });
     //
     document.getElementById(
-      "varietyList"
-    ).innerHTML = `<div class="row leadersTitle"><h4>Variety</h4></div>`;
+      "globesList"
+    ).innerHTML = `<div class="row leadersTitle"><h4>Globes</h4></div>`;
     //
     db.collection("users")
-      .orderBy("variety", "desc")
+      .orderBy("globes", "desc")
       .get()
       .then(function (x) {
         x.forEach(function (doc) {
           var userData = doc.data();
-          document.getElementById("varietyList").insertAdjacentHTML(
+          document.getElementById("globesList").insertAdjacentHTML(
             "beforeend",
             `            <div class="row leaderrow">
                         <div class="leadername ${userData.name}"  id="${doc.id}"><a  >${userData.name}</a></div>
                         <div class="myProgress leaderbar">
-                          <div class="myBar" style="width:${userData.variety}%;">${userData.variety}%</div>
+                          <div class="myBar" style="width:${userData.globes}%;">${userData.globes}%</div>
                         </div>
                       </div>`
           );
@@ -466,11 +466,11 @@ function putUpPosters() {
   //console.log(checked.length);
 
   for (let i = 0; i < checked.length; i++) {
-    if (checked[i].id == "indie") {
-      toggleList = toggleList.concat(indieList);
+    if (checked[i].id == "predict") {
+      toggleList = toggleList.concat(predictList);
     }
-    if (checked[i].id == "variety") {
-      toggleList = toggleList.concat(varietyList);
+    if (checked[i].id == "globes") {
+      toggleList = toggleList.concat(globesList);
     }
 
     if (checked[i].id == "spirits") {
@@ -625,18 +625,18 @@ function putUpPosters() {
               //leaders bars
               //create ratios and store
               if (loggedIn == 1) {
-                var indieMatch = dbWatched.filter((element) =>
-                  indieList.includes(element)
+                var predictMatch = dbWatched.filter((element) =>
+                  predictList.includes(element)
                 );
-                var indieRatio = Math.round(
-                  (100 * indieMatch.length) / indieList.length
+                var predictRatio = Math.round(
+                  (100 * predictMatch.length) / predictList.length
                 );
 
-                var varietyMatch = dbWatched.filter((element) =>
-                  varietyList.includes(element)
+                var globesMatch = dbWatched.filter((element) =>
+                  globesList.includes(element)
                 );
-                var varietyRatio = Math.round(
-                  (100 * varietyMatch.length) / varietyList.length
+                var globesRatio = Math.round(
+                  (100 * globesMatch.length) / globesList.length
                 );
                 var spiritsMatch = dbWatched.filter((element) =>
                   spiritsList.includes(element)
@@ -660,8 +660,8 @@ function putUpPosters() {
 
                 userDoc.set(
                   {
-                    indie: indieRatio,
-                    variety: varietyRatio,
+                    predict: predictRatio,
+                    globes: globesRatio,
                     spirits: spiritsRatio,
                     fifty: fiftyRatio,
                     union: unionRatio,
