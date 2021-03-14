@@ -442,9 +442,9 @@ leaderslink.addEventListener("click", function () {
                   })
                   .then((details) => {
                     if (details.poster_path !== null) {
-                      let poster = `https://image.tmdb.org/t/p/w500${details.poster_path}`;
+                      var poster = `https://image.tmdb.org/t/p/w500${details.poster_path}`;
                     } else {
-                      let poster = `../images/noposter.jpg`;
+                      var poster = `../images/noposter.jpg`;
                     }
                     let id = details.id;
                     let title = details.original_title;
