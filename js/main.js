@@ -444,7 +444,7 @@ leaderslink.addEventListener("click", function () {
                     if (details.poster_path !== null) {
                       var poster = `https://image.tmdb.org/t/p/w500${details.poster_path}`;
                     } else {
-                      var poster = `../images/noposter.jpg`;
+                      var poster = `images/noposter.jpg`;
                     }
                     let id = details.id;
                     let title = details.original_title;
@@ -624,7 +624,7 @@ function putUpPosters() {
           if (details.poster_path !== null) {
             var poster = `https://image.tmdb.org/t/p/w500${details.poster_path}`;
           } else {
-            var poster = `../images/noposter.jpg`;
+            var poster = `images/noposter.jpg`;
           }
           let id = details.id;
           let title = details.title;
