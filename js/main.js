@@ -3,6 +3,8 @@ import {
   predictList,
   fiftyList,
   spiritsList,
+  sagList,
+  baftaList,
   unionList,
 } from "./lists.js";
 
@@ -277,6 +279,51 @@ leaderslink.addEventListener("click", function () {
         });
       });
     //
+
+    document.getElementById(
+      "sagList"
+    ).innerHTML = `<div class="row leadersTitle"><h4>SAGs</h4></div>`;
+    //
+    db.collection("users")
+      .orderBy("sag", "desc")
+      .get()
+      .then(function (x) {
+        x.forEach(function (doc) {
+          var userData = doc.data();
+          document.getElementById("sagList").insertAdjacentHTML(
+            "beforeend",
+            `            <div class="row leaderrow">
+                          <div class="leadername ${userData.name}"  id="${doc.id}" ><a>${userData.name}</a></div>
+                          <div class="myProgress leaderbar">
+                            <div class="myBar" style="width:${userData.sag}%;">${userData.sag}%</div>
+                          </div>
+                        </div>`
+          );
+        });
+      });
+    //
+    document.getElementById(
+      "baftaList"
+    ).innerHTML = `<div class="row leadersTitle"><h4>BAFTAs</h4></div>`;
+    //
+    db.collection("users")
+      .orderBy("bafta", "desc")
+      .get()
+      .then(function (x) {
+        x.forEach(function (doc) {
+          var userData = doc.data();
+          document.getElementById("baftaList").insertAdjacentHTML(
+            "beforeend",
+            `            <div class="row leaderrow">
+                          <div class="leadername ${userData.name}"  id="${doc.id}" ><a>${userData.name}</a></div>
+                          <div class="myProgress leaderbar">
+                            <div class="myBar" style="width:${userData.bafta}%;">${userData.bafta}%</div>
+                          </div>
+                        </div>`
+          );
+        });
+      });
+    //
     document.getElementById(
       "fiftyList"
     ).innerHTML = `<div class="row leadersTitle"><h4>Best 50</h4></div>`;
@@ -353,7 +400,11 @@ leaderslink.addEventListener("click", function () {
                     return response.json();
                   })
                   .then((details) => {
-                    let poster = details.poster_path;
+                    if (details.poster_path !== null) {
+                      let poster = `https://image.tmdb.org/t/p/w500${details.poster_path}`;
+                    } else {
+                      let poster = `../images/noposter.jpg`;
+                    }
                     let id = details.id;
                     let title = details.original_title;
 
@@ -361,7 +412,7 @@ leaderslink.addEventListener("click", function () {
                     h.insertAdjacentHTML(
                       "beforeend",
                       `<div class="movie"  id="${id}">
-                    <img src="https://image.tmdb.org/t/p/w500${poster}" alt="${title}" id="poster" class="image"/> <span class="material-icons circlecheck">
+                    <img src=${poster} alt="${title}" id="poster" class="image"/> <span class="material-icons circlecheck">
                     check_circle_outline
                     </span><div class="movieTitle"><a href="https://www.themoviedb.org/movie/${id}">${title}</a></div>
                     </div>`
@@ -476,6 +527,12 @@ function putUpPosters() {
     if (checked[i].id == "spirits") {
       toggleList = toggleList.concat(spiritsList);
     }
+    if (checked[i].id == "sag") {
+      toggleList = toggleList.concat(sagList);
+    }
+    if (checked[i].id == "bafta") {
+      toggleList = toggleList.concat(baftaList);
+    }
     if (checked[i].id == "fifty") {
       toggleList = toggleList.concat(fiftyList);
     }
@@ -523,7 +580,11 @@ function putUpPosters() {
           return response.json();
         })
         .then((details) => {
-          let poster = details.poster_path;
+          if (details.poster_path !== null) {
+            var poster = `https://image.tmdb.org/t/p/w500${details.poster_path}`;
+          } else {
+            var poster = `../images/noposter.jpg`;
+          }
           let id = details.id;
           let title = details.title;
 
@@ -547,7 +608,7 @@ function putUpPosters() {
             h.insertAdjacentHTML(
               "beforeend",
               `<div class="movie seen"  id="${id}">
-                    <img src="https://image.tmdb.org/t/p/w500${poster}" alt="${title}" id="poster" class="image"/> <span class="material-icons circlecheck">
+                    <img src=${poster} a alt="${title}" id="poster" class="image"/> <span class="material-icons circlecheck">
                     check_circle_outline
                     </span><div class="movieTitle"><a href="https://www.themoviedb.org/movie/${id}">${title}</a></div>
                     </div>`
@@ -556,7 +617,7 @@ function putUpPosters() {
             h.insertAdjacentHTML(
               "beforeend",
               `<div class="movie unseen"  id="${id}">
-                    <img src="https://image.tmdb.org/t/p/w500${poster}" alt="${title}" id="poster" class="image"/> <span class="material-icons circlecheck">
+                    <img src=${poster} a alt="${title}" id="poster" class="image"/> <span class="material-icons circlecheck">
                     check_circle_outline
                     </span><div class="movieTitle"><a href="https://www.themoviedb.org/movie/${id}">${title}</a></div>
                     </div>`
@@ -644,6 +705,18 @@ function putUpPosters() {
                 var spiritsRatio = Math.round(
                   (100 * spiritsMatch.length) / spiritsList.length
                 );
+                var sagMatch = dbWatched.filter((element) =>
+                  sagList.includes(element)
+                );
+                var sagRatio = Math.round(
+                  (100 * sagMatch.length) / sagList.length
+                );
+                var baftaMatch = dbWatched.filter((element) =>
+                  baftaList.includes(element)
+                );
+                var baftaRatio = Math.round(
+                  (100 * baftaMatch.length) / baftaList.length
+                );
                 var fiftyMatch = dbWatched.filter((element) =>
                   fiftyList.includes(element)
                 );
@@ -663,6 +736,8 @@ function putUpPosters() {
                     predict: predictRatio,
                     globes: globesRatio,
                     spirits: spiritsRatio,
+                    sag: sagRatio,
+                    bafta: baftaRatio,
                     fifty: fiftyRatio,
                     union: unionRatio,
                   },
