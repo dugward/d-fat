@@ -213,7 +213,7 @@ leaderslink.addEventListener("click", function () {
 
     document.getElementById(
       "predictList"
-    ).innerHTML = `<div class="row leadersTitle"><h4>Predicts</h4></div>`;
+    ).innerHTML = `<div class="row leadersTitle">Predicts</div>`;
     //
     db.collection("users")
       .orderBy("predict", "desc")
@@ -236,7 +236,7 @@ leaderslink.addEventListener("click", function () {
     //
     document.getElementById(
       "globesList"
-    ).innerHTML = `<div class="row leadersTitle"><h4>Globes</h4></div>`;
+    ).innerHTML = `<div class="row leadersTitle">Globes</div>`;
     //
     db.collection("users")
       .orderBy("globes", "desc")
@@ -259,7 +259,7 @@ leaderslink.addEventListener("click", function () {
     //
     document.getElementById(
       "spiritsList"
-    ).innerHTML = `<div class="row leadersTitle"><h4>Spirits</h4></div>`;
+    ).innerHTML = `<div class="row leadersTitle">Spirits</div>`;
     //
     db.collection("users")
       .orderBy("spirits", "desc")
@@ -282,7 +282,7 @@ leaderslink.addEventListener("click", function () {
 
     document.getElementById(
       "sagList"
-    ).innerHTML = `<div class="row leadersTitle"><h4>SAGs</h4></div>`;
+    ).innerHTML = `<div class="row leadersTitle">SAGs</div>`;
     //
     db.collection("users")
       .orderBy("sag", "desc")
@@ -304,7 +304,7 @@ leaderslink.addEventListener("click", function () {
     //
     document.getElementById(
       "baftaList"
-    ).innerHTML = `<div class="row leadersTitle"><h4>BAFTAs</h4></div>`;
+    ).innerHTML = `<div class="row leadersTitle">BAFTAs <a id="shortsBafta">(remove shorts)</a><a id="backBafta" style="display:none">(add shorts)</a></div>`;
     //
     db.collection("users")
       .orderBy("bafta", "desc")
@@ -317,16 +317,57 @@ leaderslink.addEventListener("click", function () {
             `            <div class="row leaderrow">
                           <div class="leadername ${userData.name}"  id="${doc.id}" ><a>${userData.name}</a></div>
                           <div class="myProgress leaderbar">
-                            <div class="myBar" style="width:${userData.bafta}%;">${userData.bafta}%</div>
+                            <div class="myBar bafta" style="width:${userData.bafta}%;">${userData.bafta}%</div>
                           </div>
                         </div>`
           );
         });
-      });
+      })
+      .then(
+        document.querySelector("#shortsBafta").addEventListener("click", () => {
+          let bars = document.querySelectorAll(".mybar,.bafta");
+          bars.forEach((el) => {
+            let perc1 = el.innerText.slice(0, -1);
+            let perc = perc1 / 100;
+            console.log(perc);
+            let numWatched = Math.round(perc * baftaList.length);
+            console.log(numWatched);
+            let newPer = Math.round(
+              (numWatched / (baftaList.length - 8)) * 100
+            );
+            console.log(newPer);
+            el.style.width = `${newPer}%`;
+            el.innerText = `${newPer}%`;
+            document.querySelector("#shortsBafta").style.display = "none";
+            document.querySelector("#backBafta").style.display = "inline";
+
+            //
+          });
+        })
+      )
+      .then(
+        document.querySelector("#backBafta").addEventListener("click", () => {
+          let bars = document.querySelectorAll(".mybar,.bafta");
+          bars.forEach((el) => {
+            let perc1 = el.innerText.slice(0, -1);
+            let perc = perc1 / 100;
+            console.log(perc);
+            let numWatched = Math.round(perc * (baftaList.length - 8));
+            console.log(numWatched);
+            let newPer = Math.round((numWatched / baftaList.length) * 100);
+            console.log(newPer);
+            el.style.width = `${newPer}%`;
+            el.innerText = `${newPer}%`;
+            document.querySelector("#backBafta").style.display = "none";
+            document.querySelector("#shortsBafta").style.display = "inline";
+            //
+          });
+        })
+      );
     //
     document.getElementById(
       "fiftyList"
-    ).innerHTML = `<div class="row leadersTitle"><h4>Best 50</h4></div>`;
+    ).innerHTML = `<div class="row leadersTitle">Best 50</div>`;
     //
     db.collection("users")
       .orderBy("fifty", "desc")
@@ -347,7 +388,7 @@ leaderslink.addEventListener("click", function () {
       });
     document.getElementById(
       "unionList"
-    ).innerHTML = `<div class="row leadersTitle"><h4>∩ List</h4></div>`;
+    ).innerHTML = `<div class="row leadersTitle">∩ List</div>`;
     db.collection("users")
       .orderBy("union", "desc")
       .get()
