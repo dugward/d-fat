@@ -78,9 +78,13 @@
 
       <div class="row listButtons sweep">
         <div class="twelve columns">
-          <a href="#" id="predict" class="button list checked"
+          <!-- <a href="#" id="predict" class="button list checked"
             ><span class="material-icons"> done </span> Predicts</a
+          > -->
+          <a href="#" id="oscar" class="button list checked"
+            ><span class="material-icons"> done </span> Oscars</a
           >
+          <a href="#" id="shorts" class="button list">Shorts</a>
           <a href="#" id="globes" class="button list">Globes</a>
           <a href="#" id="spirits" class="button list">Spirits</a>
           <a href="#" id="sag" class="button list">SAGs</a>
@@ -106,9 +110,15 @@
 
       <div id="listExplain" class="row">
         <p class="listexplain">
+          <b>Oscars:</b> The Academy Awards feature nominees.
+        </p>
+        <p class="listexplain">
+          <b>Shorts:</b> The Academy Awards short film nominees.
+        </p>
+        <!-- <p class="listexplain">
           <b>Predicts:</b> The Oscars predictions from the critics at IndieWire
           and Variety.
-        </p>
+        </p> -->
         <p class="listexplain">
           <b>Globes:</b> The Golden Globes film nominees.
         </p>
@@ -117,7 +127,7 @@
         </p>
         <p class="listexplain">
           <b>50 Best:</b> A list of the year's best according to a survey of 230
-          film critics by predictWire.
+          film critics by indieWire.
         </p>
         <p class="listexplain">
           <b>SAG:</b> The Screen Actors Guild Awards nominees.
@@ -126,8 +136,8 @@
           <b>BAFTA:</b> The British Academy Film Awards nominees.
         </p>
         <p class="listexplain">
-          <b>∩ List:</b> The intersection of all other lists, excluding the
-          Spirit and BAFTA nominees.
+          <b>∩ List:</b> The intersection of the Oscars, BAFTA, and SAG
+          nominees.
         </p>
       </div>
 
@@ -161,7 +171,9 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
       <div id="leaders" class="row">
-        <div class="row" id="predictList"></div>
+        <div class="row" id="oscarList"></div>
+        <!-- <div class="row" id="predictList"></div> -->
+        <div class="row" id="shortsList"></div>
         <div class="row" id="globesList"></div>
         <div class="row" id="spiritsList"></div>
         <div class="row" id="sagList"></div>

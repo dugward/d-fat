@@ -1,5 +1,67 @@
 // Here are the lists
 
+export const oscarList = [
+  539617,
+  556678,
+  556984,
+  560050,
+  566076,
+  575813,
+  577922,
+  580175,
+  581032,
+  581734,
+  653756,
+  661914,
+  667869,
+  669363,
+  676535,
+  682110,
+  728118,
+  337401,
+  413518,
+  422803,
+  441130,
+  502033,
+  508439,
+  508442,
+  508570,
+  516486,
+  531454,
+  740985,
+  581859,
+  582014,
+  583406,
+  590223,
+  592984,
+  600354,
+  614560,
+  614911,
+  615643,
+  615667,
+  628534,
+  641662,
+  653725,
+];
+
+export const shortsList = [
+  663343,
+  750249,
+  713776,
+  663881,
+  757697,
+  655154,
+  776751,
+  741845,
+  747059,
+  631344,
+  675235,
+  787428,
+  678801,
+  762632,
+  689676,
+];
+
 export const predictList = [
   441130,
   464052,
@@ -268,10 +330,7 @@ export const baftaList = [
   568467,
 ];
 
-// console.log(concatList);
-
-const unionLista = fiftyList.filter((x) => globesList.includes(x));
-
-const unionListb = unionLista.filter((x) => sagList.includes(x));
-
-export const unionList = unionListb.filter((x) => predictList.includes(x));
+const unionAll = [oscarList, globesList, sagList];
+export const unionList = unionAll.reduce((a, b) =>
+  a.filter((c) => b.includes(c))
+);

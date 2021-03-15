@@ -1,6 +1,8 @@
 import {
+  oscarList,
+  shortsList,
   globesList,
-  predictList,
+  // predictList,
   fiftyList,
   spiritsList,
   sagList,
@@ -211,25 +213,72 @@ leaderslink.addEventListener("click", function () {
     document.getElementById("title").style.cursor = "pointer";
     //update leadcers bars
 
+    //
+    // document.getElementById(
+    //   "predictList"
+    // ).innerHTML = `<div class="row leadersTitle">Predicts</div>`;
+    // //
+    // db.collection("users")
+    //   .orderBy("predict", "desc")
+    //   .get()
+    //   .then(function (x) {
+    //     x.forEach(function (doc) {
+    //       var userData = doc.data();
+
+    //       document.getElementById("predictList").insertAdjacentHTML(
+    //         "beforeend",
+    //         `            <div class="row leaderrow">
+    //                     <div class="leadername ${userData.name}"  id="${doc.id}"><a  >${userData.name}</a></div>
+    //                     <div class="myProgress leaderbar">
+    //                       <div class="myBar" style="width:${userData.predict}%;">${userData.predict}%</div>
+    //                     </div>
+    //                   </div>`
+    //       );
+    //     });
+    //   });
+    //
     document.getElementById(
-      "predictList"
-    ).innerHTML = `<div class="row leadersTitle">Predicts</div>`;
+      "oscarList"
+    ).innerHTML = `<div class="row leadersTitle">Oscars</div>`;
     //
     db.collection("users")
-      .orderBy("predict", "desc")
+      .orderBy("oscar", "desc")
       .get()
       .then(function (x) {
         x.forEach(function (doc) {
           var userData = doc.data();
 
-          document.getElementById("predictList").insertAdjacentHTML(
+          document.getElementById("oscarList").insertAdjacentHTML(
             "beforeend",
             `            <div class="row leaderrow">
                         <div class="leadername ${userData.name}"  id="${doc.id}"><a  >${userData.name}</a></div>
                         <div class="myProgress leaderbar">
-                          <div class="myBar" style="width:${userData.predict}%;">${userData.predict}%</div>
+                          <div class="myBar" style="width:${userData.oscar}%;">${userData.oscar}%</div>
                         </div>
                       </div>`
+          );
+        });
+      });
+    //
+    document.getElementById(
+      "shortsList"
+    ).innerHTML = `<div class="row leadersTitle">Shorts</div>`;
+    //
+    db.collection("users")
+      .orderBy("shorts", "desc")
+      .get()
+      .then(function (x) {
+        x.forEach(function (doc) {
+          var userData = doc.data();
+
+          document.getElementById("shortsList").insertAdjacentHTML(
+            "beforeend",
+            `            <div class="row leaderrow">
+                          <div class="leadername ${userData.name}"  id="${doc.id}"><a  >${userData.name}</a></div>
+                          <div class="myProgress leaderbar">
+                            <div class="myBar" style="width:${userData.shorts}%;">${userData.shorts}%</div>
+                          </div>
+                        </div>`
           );
         });
       });
@@ -558,8 +607,14 @@ function putUpPosters() {
   //console.log(checked.length);
 
   for (let i = 0; i < checked.length; i++) {
-    if (checked[i].id == "predict") {
-      toggleList = toggleList.concat(predictList);
+    // if (checked[i].id == "predict") {
+    //   toggleList = toggleList.concat(predictList);
+    // }
+    if (checked[i].id == "oscar") {
+      toggleList = toggleList.concat(oscarList);
+    }
+    if (checked[i].id == "shorts") {
+      toggleList = toggleList.concat(shortsList);
     }
     if (checked[i].id == "globes") {
       toggleList = toggleList.concat(globesList);
@@ -727,13 +782,24 @@ function putUpPosters() {
               //leaders bars
               //create ratios and store
               if (loggedIn == 1) {
-                var predictMatch = dbWatched.filter((element) =>
-                  predictList.includes(element)
+                // var predictMatch = dbWatched.filter((element) =>
+                //   predictList.includes(element)
+                // );
+                // var predictRatio = Math.round(
+                //   (100 * predictMatch.length) / predictList.length
+                // );
+                var shortsMatch = dbWatched.filter((element) =>
+                  shortsList.includes(element)
                 );
-                var predictRatio = Math.round(
-                  (100 * predictMatch.length) / predictList.length
+                var shortsRatio = Math.round(
+                  (100 * shortsMatch.length) / shortsList.length
                 );
-
+                var oscarMatch = dbWatched.filter((element) =>
+                  oscarList.includes(element)
+                );
+                var oscarRatio = Math.round(
+                  (100 * oscarMatch.length) / oscarList.length
+                );
                 var globesMatch = dbWatched.filter((element) =>
                   globesList.includes(element)
                 );
@@ -775,6 +841,8 @@ function putUpPosters() {
                 userDoc.set(
                   {
                     predict: predictRatio,
+                    oscar: oscarRatio,
+                    shorts: shortRatio,
                     globes: globesRatio,
                     spirits: spiritsRatio,
                     sag: sagRatio,
