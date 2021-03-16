@@ -842,7 +842,7 @@ function putUpPosters() {
                   {
                     // predict: predictRatio,
                     oscar: oscarRatio,
-                    shorts: shortRatio,
+                    shorts: shortsRatio,
                     globes: globesRatio,
                     spirits: spiritsRatio,
                     sag: sagRatio,
