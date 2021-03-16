@@ -840,7 +840,7 @@ function putUpPosters() {
 
                 userDoc.set(
                   {
-                    predict: predictRatio,
+                    // predict: predictRatio,
                     oscar: oscarRatio,
                     shorts: shortRatio,
                     globes: globesRatio,
