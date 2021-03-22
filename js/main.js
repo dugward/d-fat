@@ -658,7 +658,7 @@ function putUpPosters() {
 
     if (isNaN(watchedRatio) == false) {
       bar[0].style.width = `${watchedRatio}%`;
-      bar[0].innerText = `${watchedRatio}%`;
+      bar[0].innerHTML = `${watchedRatio}%&nbsp;&nbsp;&nbsp;&nbsp;${y.length}/${displayList.length}`;
     } else {
       bar[0].innerText = "0%";
       bar[0].style.width = "0%";
