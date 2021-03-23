@@ -42,6 +42,7 @@ export const oscarList = [
   628534,
   641662,
   653725,
+  653729,
 ];
 
 export const shortsList = [
@@ -208,6 +209,7 @@ export const fiftyList = [
   558582,
   568467,
   614560,
+  653729,
 ];
 
 export const spiritsList = [
@@ -245,6 +247,7 @@ export const spiritsList = [
   727002,
   728116,
   728118,
+  653729,
 ];
 
 export const sagList = [
