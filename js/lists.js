@@ -1,7 +1,6 @@
 // Here are the lists
 
 export const oscarList = [
-  539617,
   556678,
   556984,
   560050,
@@ -216,7 +215,6 @@ export const spiritsList = [
   446159,
   502033,
   530723,
-  539617,
   558582,
   558582,
   570670,
